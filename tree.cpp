@@ -8,6 +8,11 @@ DataClass::DataClass(char letter){
     this->freq = 1;
     this->letter = letter;
 }
+DataClass::DataClass(char letter, int freq){
+    this->freq = freq;
+    this->letter = letter;
+}
+
 
 ostream& operator<<(ostream &fout, DataClass *data){
     cout << data->letter << ": " << data->freq << endl;
@@ -21,11 +26,6 @@ Node::Node(DataClass *data, Node *left, Node *right){
     this->right = right;
 }
 
-Node::~Node(){
-    delete left;
-    delete right;
-}
-
 ostream& operator<<(ostream &fout, Node node) {
     cout << node.data;
     return fout;
@@ -35,6 +35,10 @@ Queue::Queue(){
     capacity = 2;
     size = 0;
     nodes = new Node[capacity];
+}
+
+Queue::~Queue(){
+    delete[] nodes;
 }
 
 void Queue::addNode(char letter) {
@@ -88,4 +92,23 @@ void Queue::sort()
             }
         }
     }
+}
+
+int Queue::getSize() {
+    return size;
+}
+
+HuffmanTree::HuffmanTree(Node *node) {
+    root = node;
+}
+
+void HuffmanTree::print() {
+    printInorder(root);
+}
+
+void HuffmanTree::printInorder(Node *node) {
+    if (!node){return;}
+    printInorder(node->left);
+    printInorder(node->right);
+    cout << *node;
 }
