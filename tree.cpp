@@ -108,7 +108,25 @@ void HuffmanTree::print() {
 
 void HuffmanTree::printInorder(Node *node) {
     if (!node){return;}
+    cout << *node;
     printInorder(node->left);
     printInorder(node->right);
-    cout << *node;
+}
+
+void HuffmanTree::printCodes() {
+    string str;
+    printCodesRecur(root, str);
+}
+
+void HuffmanTree::printCodesRecur(Node *node, string str)
+{
+ 
+    if (!node) {return;}
+
+    if (node->data->letter != '#'){
+        cout << node->data->letter << " " << str << "\n";
+    }
+ 
+    printCodesRecur(node->left, str + "1");
+    printCodesRecur(node->right, str + "0");
 }

@@ -22,6 +22,8 @@ class HuffmanTree{
     public:
         void print();
         void printInorder(Node *node);
+        void printCodes();
+        void printCodesRecur(Node *node, string str);
         HuffmanTree(Node *node);
     private:
         Node *root;
