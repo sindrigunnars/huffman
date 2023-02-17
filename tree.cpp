@@ -2,6 +2,7 @@
 #include "huffman.h"
 #include <stdio.h>
 #include <ctype.h>
+#include <deque>
 using namespace std;
 
 DataClass::DataClass(char letter){
@@ -37,9 +38,7 @@ Queue::Queue(){
     nodes = new Node[capacity];
 }
 
-Queue::~Queue(){
-    delete[] nodes;
-}
+Queue::~Queue(){}
 
 void Queue::addNode(char letter) {
     if ((isalpha(letter) || isdigit(letter) || letter == '_') && !iscntrl(letter)) {
@@ -98,7 +97,36 @@ int Queue::getSize() {
     return size;
 }
 
+HuffmanTree::HuffmanTree() {
+    root = NULL;
+}
+
 HuffmanTree::HuffmanTree(Node *node) {
+    root = node;
+}
+
+void HuffmanTree::build(Queue que) {
+    deque<Node *> node_queue;
+    for (int i = 0; i < que.getSize(); i++) {
+        node_queue.push_back(new Node(que[i]));
+    }
+
+    Node *node;
+    while(!node_queue.empty()){
+        Node *left = node_queue.front();
+        node_queue.pop_front();
+        Node *right = node_queue.front();
+        node_queue.pop_front();
+        node = new Node(new DataClass('#', left->data->freq+right->data->freq), left, right);
+        if(!node_queue.empty()){
+            node_queue.push_back(node);
+            int cnt = node_queue.size() - 1;
+            while ((node_queue[cnt]->data->freq <= node_queue[cnt-1]->data->freq) && (cnt > 0)){
+                swap(node_queue[cnt], node_queue[cnt-1]);
+                cnt--;
+            }
+        }
+    }
     root = node;
 }
 
@@ -129,4 +157,8 @@ void HuffmanTree::printCodesRecur(Node *node, string str)
  
     printCodesRecur(node->left, str + "1");
     printCodesRecur(node->right, str + "0");
+}
+
+HuffmanTree::~HuffmanTree() {
+    //delete[] root;
 }

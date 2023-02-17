@@ -18,17 +18,6 @@ class Node{
         Node *right;
 };
 
-class HuffmanTree{
-    public:
-        void print();
-        void printInorder(Node *node);
-        void printCodes();
-        void printCodesRecur(Node *node, string str);
-        HuffmanTree(Node *node);
-    private:
-        Node *root;
-};
-
 class Queue{
     public:
         Queue();
@@ -42,4 +31,18 @@ class Queue{
         int capacity, size;
         Node *nodes;
         void resize();
+};
+
+class HuffmanTree{
+    public:
+        void print();
+        void printInorder(Node *node);
+        void printCodes();
+        void printCodesRecur(Node *node, string str);
+        void build(Queue que);
+        HuffmanTree(Node *node);
+        HuffmanTree();
+        virtual ~HuffmanTree();
+    private:
+        Node *root;
 };
