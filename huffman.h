@@ -1,48 +1,29 @@
-#include <iostream>
+#include "data.h"
+#include <deque>
 using namespace std;
 
-struct DataClass{
-    DataClass(char letter);
-    DataClass(char letter, int freq);
-    int freq;
+struct HuffmanTable {
     char letter;
-    friend ostream& operator<<(ostream &fout, DataClass *data);
-};
-
-class Node{
-    public:
-        Node(DataClass *data = NULL, Node *left = NULL, Node *right = NULL);
-        DataClass *data;
-        friend ostream& operator<<(ostream &fout, Node node);
-        Node *left;
-        Node *right;
-};
-
-class Queue{
-    public:
-        Queue();
-        void addNode(char letter);
-        Node operator[](int idx);
-        friend ostream& operator<<(ostream &fout, Queue &que);
-        void sort();
-        int getSize();
-        virtual ~Queue();
-    private:
-        int capacity, size;
-        Node *nodes;
-        void resize();
+    string code;
+    HuffmanTable(char letter, string str);
+    friend ofstream& operator<<(ofstream& fout, HuffmanTable tab);
 };
 
 class HuffmanTree{
     public:
         void print();
         void printInorder(Node *node);
-        void printCodes();
-        void printCodesRecur(Node *node, string str);
-        void build(Queue que);
+        void build(char *arg);
+        void buildFromTable();
+        void write(char* in, char* out);
+        void read(char *in, char *out);
         HuffmanTree(Node *node);
         HuffmanTree();
         virtual ~HuffmanTree();
     private:
+        void buildTable();
+        void buildTableRecur(Node *node, string str);
         Node *root;
+        deque<HuffmanTable> table;
+
 };
