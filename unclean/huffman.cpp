@@ -158,3 +158,55 @@ void HuffmanTree::buildTableRecur(Node *node, string str)
     buildTableRecur(node->left, str + "1");
     buildTableRecur(node->right, str + "0");
 }
+
+// void HuffmanTree::buildFromTable() {
+//     ifstream fin;
+//     fin.open("table.txt");
+//     string code;
+//     char letter;
+//     while (true) {
+//         fin >> letter >> code;
+//         if (letter == '/') {break;}
+//         table.push_back(HuffmanTable(letter, code));
+//     }
+//     fin.close();
+
+//     fin.open("table.txt");
+//     root = new Node(new DataClass());
+//     Node *cur;
+//     char next;
+//     string line;
+//     while (fin >> line) {
+//         cur = root;
+//         Node *node;
+//         for (int i = 0;i < line.length();i++) {
+//             next = line[i];
+//             if (isalpha(next) || next == '_') {
+//                 node = new Node(new DataClass(next));
+//             }     
+//             else if (isnumber(next)) {
+//                 Node *empty = new Node(new DataClass());
+//                 if (i == line.length()-1) {empty = node;}
+//                 if (next == '1') {
+//                     if (cur->left == NULL) {cur->left = empty;}
+//                     cur = cur->left;
+//                 }else if (next == '0'){
+//                     if (cur->right == NULL) {cur->right = empty;}
+//                     cur = cur->right;
+//                 }
+//             } 
+//         }
+//     }
+//     fin.close();
+// }
+
+// void HuffmanTree::print() {
+//     printInorder(root);
+// }
+
+// void HuffmanTree::printInorder(Node *node) {
+//     if (node == NULL){return;}
+//     if (node->data->letter != '#') {cout << node;}
+//     printInorder(node->left);
+//     printInorder(node->right);
+// }

@@ -23,4 +23,8 @@ class HuffmanTree{
         void buildTableRecur(Node *node, string str);
         Node *root;
         deque<HuffmanTable> table;
+        // void print();
+        // void printInorder(Node *node);
+        // void buildFromTable();
+
 };

@@ -1,6 +1,5 @@
 #include "data.h"
 #include "huffman.h"
-#include <cstring>
 using namespace std;
 
 int main(int argc, char** argv) {
